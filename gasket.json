@@ -1,0 +1,3 @@
+{
+  "build": ["docker build --tag=maxogden/gifify ."]
+}
