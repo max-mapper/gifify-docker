@@ -2,6 +2,8 @@
 
 A docker container for [gifify](https://github.com/vvo/gifify)
 
+![docker-badge](http://dockeri.co/image/maxogden/gifify)
+
 ## installation
 
 1. install docker
