@@ -1,0 +1,18 @@
+{
+  "name": "gifify-docker",
+  "version": "1.0.0",
+  "description": "A docker container for gifify",
+  "scripts": {
+    "build": "gasket run build",
+    "postinstall": "npm run build"
+  },
+  "author": "max ogden",
+  "license": "BSD",
+  "dependencies": {
+    "docker-run": "^2.0.0",
+    "gasket": "^2.0.0"
+  },
+  "bin": {
+    "gifify-docker": "./bin.js"
+  }
+}
