@@ -1,25 +1,18 @@
-FROM ubuntu:14.04
+FROM node:8
 
-RUN apt-get update
-RUN apt-get -y install software-properties-common
-RUN add-apt-repository ppa:jon-severinsson/ffmpeg
-RUN apt-get update
-RUN apt-get -y install ffmpeg unzip imagemagick curl
+RUN echo "deb http://ftp.uk.debian.org/debian jessie-backports main" >> /etc/apt/sources.list
+RUN set -ex && \
+  apt-get update && \
+  apt-get -y install ffmpeg unzip imagemagick curl
 
 # install fork of gifsicle with better lossless gif support
-RUN curl -OJL https://github.com/pornel/giflossy/releases/download/lossy%2F1.82.1/gifsicle-1.82.1-lossy.zip
-RUN unzip gifsicle-1.82.1-lossy.zip -d gifsicle
-RUN mv gifsicle/linux/gifsicle-debian6 /usr/local/bin/gifsicle
-
-# install iojs
-RUN curl -OJL https://iojs.org/dist/v1.2.0/iojs-v1.2.0-linux-x64.tar.xz
-RUN tar xf iojs-v1.2.0-linux-x64.tar.xz
-RUN ln -s /iojs-v1.2.0-linux-x64/bin/node /usr/local/bin/node
-RUN ln -s /iojs-v1.2.0-linux-x64/bin/iojs /usr/local/bin/iojs
-RUN ln -s /iojs-v1.2.0-linux-x64/bin/npm /usr/local/bin/npm
+RUN set -ex && \
+  curl -OJL https://github.com/pornel/giflossy/releases/download/lossy%2F1.82.1/gifsicle-1.82.1-lossy.zip && \
+  unzip gifsicle-1.82.1-lossy.zip -d gifsicle && \
+  mv gifsicle/linux/gifsicle-debian6 /usr/local/bin/gifsicle
 
 # install gifify
-RUN npm i gifify -g
+RUN npm i -g gifify
 
 # run gifify in /data (requires user to mount their source folder in /data)
 WORKDIR /data
